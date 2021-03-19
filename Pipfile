@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 discord = "*"
 loguru = "*"
+expiringdict = "*"
 
 [dev-packages]
 

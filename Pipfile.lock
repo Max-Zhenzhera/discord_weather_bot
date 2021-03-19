@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "2e744b73d01b8b637d387cf1aeb28ae98b6d825a1cc5480c247a026d3e7cf0b7"
+            "sha256": "916e884818efd7a577f4b02f770ee7b7e7b605b466cd13259c1c60fd347f780f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -106,6 +106,13 @@
             ],
             "markers": "python_full_version >= '3.5.3'",
             "version": "==1.6.0"
+        },
+        "expiringdict": {
+            "hashes": [
+                "sha256:fe2ba427220425c3c8a3d29f6d2e2985bcee323f8bcd4021e68ebefbd90d8250"
+            ],
+            "index": "pypi",
+            "version": "==1.2.1"
         },
         "idna": {
             "hashes": [
