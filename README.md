@@ -6,7 +6,7 @@
 
 <img src="sources/img/bot_logo.jpg" alt="Bot Logo" align="left" height="250px">
 
-## Weather Bot
+### Weather Bot
 
 <p>It's your small weather helper in discord server!</p>
 
