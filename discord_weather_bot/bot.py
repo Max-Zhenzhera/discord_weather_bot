@@ -9,8 +9,10 @@ import aiohttp
 import loguru
 from discord.ext import commands
 
-from discord_weather_bot import settings
-from . import cogs
+from . import (
+    cogs,
+    settings
+)
 
 
 class DiscordWeatherBot(commands.Bot):

@@ -32,7 +32,7 @@ DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 WEATHER_API_TOKEN = os.getenv('WEATHER_API_TOKEN')
 
 # Bot settings
-COMMAND_PREFIX = '!'
+COMMAND_PREFIX = '.'
 DESCRIPTION = ''' Weather bot that fetch needed data quickly, convenient and easy! '''
 ACTIVITY = discord.Activity(name='the weather :)', type=discord.ActivityType.watching)
 OPTIONS = {

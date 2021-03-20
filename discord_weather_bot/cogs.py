@@ -19,8 +19,9 @@ import loguru
 from discord.ext import commands
 
 from . import (
+    embeds,
     weather_api,
-    embeds
+    settings
 )
 
 
@@ -111,7 +112,10 @@ class WeatherCommands(discord.ext.commands.Cog):
                 'Call the command in the above written way. '
                 'If it is the city from country that you did not expect to check: '
                 'then pass after the city name additional country code argument for more accurate searching.'
-                '\nExamples:\n\t!now kiev\n\t!weather odessa us\n\t!w rome it'
+                '\nExamples:'
+                f'\n\t{settings.COMMAND_PREFIX}now kiev'
+                f'\n\t{settings.COMMAND_PREFIX}weather odessa us'
+                f'\n\t{settings.COMMAND_PREFIX}w rome it'
         )
     )
     async def get_current_weather(self, ctx: discord.ext.commands.Context,
@@ -149,7 +153,9 @@ class WeatherCommands(discord.ext.commands.Cog):
                 'Call the command in the above written way. '
                 'If it is the city from country that you did not expect to check: '
                 'then pass after the city name additional country code argument for more accurate searching.'
-                '\nExamples:\n\t!today kiev\n\t!td rome it'
+                '\nExamples:'
+                f'\n\t{settings.COMMAND_PREFIX}today kiev'
+                f'\n\t{settings.COMMAND_PREFIX}td rome it'
         )
     )
     async def get_today_weather_forecast(self, ctx: discord.ext.commands.Context,
@@ -189,7 +195,9 @@ class WeatherCommands(discord.ext.commands.Cog):
                 'Call the command in the above written way. '
                 'If it is the city from country that you did not expect to check: '
                 'then pass after the city name additional country code argument for more accurate searching.'
-                '\nExamples:\n\t!tomorrow kiev\n\t!tm rome it'
+                '\nExamples:'
+                f'\n\t{settings.COMMAND_PREFIX}tomorrow kiev'
+                f'\n\t{settings.COMMAND_PREFIX}tm rome it'
         )
     )
     async def get_tomorrow_weather(self, ctx: discord.ext.commands.Context,
@@ -229,7 +237,9 @@ class WeatherCommands(discord.ext.commands.Cog):
                 'Call the command in the above written way. '
                 'If it is the city from country that you did not expect to check: '
                 'then pass after the city name additional country code argument for more accurate searching.'
-                '\nExamples:\n\t!forecast kiev\n\t!f rome it'
+                '\nExamples:'
+                f'\n\t{settings.COMMAND_PREFIX}forecast kiev'
+                f'\n\t{settings.COMMAND_PREFIX}f rome it'
         )
     )
     async def get_temperature_weather_forecast(self, ctx: discord.ext.commands.Context,
