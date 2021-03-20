@@ -1,0 +1,1 @@
+worker: python discord_weather_bot/__main__.py
