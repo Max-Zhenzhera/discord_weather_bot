@@ -26,6 +26,8 @@ import discord
 # Project paths
 CORE_DIR = pathlib.Path(__file__).parent
 PROJECT_DIR = CORE_DIR.parent
+LOG_DIR = PROJECT_DIR / 'logs'
+ERROR_LOG = LOG_DIR / 'errors.log'
 
 # Tokens
 DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')

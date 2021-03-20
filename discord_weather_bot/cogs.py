@@ -71,8 +71,11 @@ class WeatherCommands(discord.ext.commands.Cog):
         self.logger = logger
 
     async def cog_command_error(self,
-                                ctx: discord.ext.commands.Context, error: discord.ext.commands.CommandInvokeError
+                                ctx: discord.ext.commands.Context, error: discord.ext.commands.CommandError
                                 ) -> None:
+        if not isinstance(error, discord.ext.commands.CommandInvokeError):
+            raise error
+
         is_need_to_log = False
 
         internal_error = error.original
@@ -93,7 +96,14 @@ class WeatherCommands(discord.ext.commands.Cog):
             is_need_to_log = True
         else:
             # no one weather api error caught -> there is not `weather_api.errors.WeatherApiError`
-            raise internal_error
+
+            # debug
+            # raise internal_error
+            # - - -
+
+            user_message = 'Oops! It seems like it is my error, sorry, try to use the command later!'
+
+            is_need_to_log = True
 
         if is_need_to_log:
             self.logger.exception(error)
