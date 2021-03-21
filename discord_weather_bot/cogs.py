@@ -36,6 +36,17 @@ class Events(discord.ext.commands.Cog):
     async def on_ready(self) -> None:
         self.logger.info('BOT IS RUNNING')
 
+    @commands.Cog.listener()
+    async def on_command_error(self,
+                               ctx: discord.ext.commands.Context, error: discord.ext.commands.CommandError
+                               ) -> None:
+        if isinstance(error, discord.ext.commands.UserInputError):
+            await ctx.send(str(error))
+        elif isinstance(error, discord.ext.commands.CommandNotFound):
+            message = 'Oops! It seems like command is not found!'
+            message += f'Try to explore right usage with ``` {settings.COMMAND_PREFIX}help ```'
+            await ctx.send(message)
+
 
 class CommonCommands(discord.ext.commands.Cog):
     """ Implements cog extension that handle common commands """
@@ -45,7 +56,7 @@ class CommonCommands(discord.ext.commands.Cog):
 
     @commands.command(
         name='ping',
-        aliases=['p'],
+        aliases=['p', 'P', 'PING'],
         description='Call the command when you want to see the connection latency (and bot connection at all)'
     )
     async def ping(self, ctx: discord.ext.commands.Context):
@@ -54,12 +65,12 @@ class CommonCommands(discord.ext.commands.Cog):
 
     @commands.command(
         name='echo',
-        aliases=['e'],
+        aliases=['e', 'E', 'ECHO'],
         description='Call the command when you want to see the echo answer from the bot'
     )
-    async def echo(self, ctx: discord.ext.commands.Context):
+    async def echo(self, ctx: discord.ext.commands.Context, *, message: str):
         """ Echo message """
-        await ctx.send(ctx.message.content.split(' ', 1)[1])
+        await ctx.send(message)
 
 
 class WeatherCommands(discord.ext.commands.Cog):
@@ -115,7 +126,7 @@ class WeatherCommands(discord.ext.commands.Cog):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @commands.command(
         name='now',
-        aliases=['n', 'w', 'weather'],
+        aliases=['n', 'N', 'NOW', 'w', 'W', 'weather', 'WEATHER'],
         brief='Show the current weather by the city name',
         description='Call the command when you want to see the current weather in the city',
         help=(
@@ -156,7 +167,7 @@ class WeatherCommands(discord.ext.commands.Cog):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @commands.command(
         name='today',
-        aliases=['td'],
+        aliases=['td', 'TD', 'TODAY'],
         brief='Show today weather forecast by the city name',
         description='Call the command when you want to see the today weather forecast in the city',
         help=(
@@ -198,7 +209,7 @@ class WeatherCommands(discord.ext.commands.Cog):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @commands.command(
         name='tomorrow',
-        aliases=['tm', 'tmr'],
+        aliases=['tm', 'TM', 'TOMORROW'],
         brief='Show tomorrow weather forecast by the city name',
         description='Call the command when you want to see the tomorrow weather forecast in the city',
         help=(
@@ -240,7 +251,7 @@ class WeatherCommands(discord.ext.commands.Cog):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @commands.command(
         name='forecast',
-        aliases=['f', 'fr', 'frc', 'frcst'],
+        aliases=['f', 'F', 'FORECAST'],
         brief='Show short weather forecast by the city name',
         description='Call the command when you want to see the temperature weather forecast in the city',
         help=(

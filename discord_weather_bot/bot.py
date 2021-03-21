@@ -38,13 +38,3 @@ class DiscordWeatherBot(discord.ext.commands.Bot):
     def run(self):
         """ Run bot (do not require token - it is already passed) """
         super().run(settings.DISCORD_BOT_TOKEN)
-
-    async def on_command_error(self,
-                               ctx: discord.ext.commands.Context, error: discord.ext.commands.CommandError
-                               ) -> None:
-        if isinstance(error, discord.ext.commands.UserInputError):
-            await ctx.send(str(error))
-        elif isinstance(error, discord.ext.commands.CommandNotFound):
-            message = 'Oops! It seems like command is not found!'
-            message += f'Try to explore right usage with ``` {settings.COMMAND_PREFIX}help ```'
-            await ctx.send(message)

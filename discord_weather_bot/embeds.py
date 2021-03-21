@@ -174,7 +174,7 @@ class DayWeatherForecastEmbed(WeatherEmbed):
                     (
                         f'Temperature:  {period_parser.temperature:+} {measures.TEMPERATURE}',
                         f'Feels like:   {period_parser.temperature_feels_like:+} {measures.TEMPERATURE}',
-                        f'Humidity:     {period_parser.temperature_feels_like} {measures.HUMIDITY}',
+                        f'Humidity:     {period_parser.humidity} {measures.HUMIDITY}',
                         f'Clouds:       {period_parser.temperature_max} {measures.CLOUDS}',
                         f'Pressure:     {period_parser.pressure} {measures.PRESSURE}',
                         f'Wind speed:   {period_parser.wind_speed} {measures.WIND_SPEED}'
