@@ -6,7 +6,6 @@ Contains implementation of the weather bot.
 """
 
 import aiohttp
-import loguru
 import discord
 from discord.ext import commands
 
@@ -14,6 +13,10 @@ from . import (
     cogs,
     settings
 )
+from .utils.logging_ import logging_
+
+
+logging_.setup_logging(settings.LOGGING_CONFIG_PATH)
 
 
 class DiscordWeatherBot(discord.ext.commands.Bot):
@@ -28,12 +31,9 @@ class DiscordWeatherBot(discord.ext.commands.Bot):
 
         self.session = aiohttp.ClientSession()
 
-        loguru.logger.add(settings.ERROR_LOG, level='ERROR')
-        self.logger = loguru.logger
-
-        self.add_cog(cogs.Events(self, self.logger))
+        self.add_cog(cogs.Events(self))
         self.add_cog(cogs.CommonCommands(self))
-        self.add_cog(cogs.WeatherCommands(self, self.session, self.logger))
+        self.add_cog(cogs.WeatherCommands(self, self.session))
 
     def run(self):
         """ Run bot (do not require token - it is already passed) """

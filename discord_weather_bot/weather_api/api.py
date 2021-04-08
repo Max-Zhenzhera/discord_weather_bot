@@ -17,17 +17,18 @@ from typing import (
     Optional
 )
 
+import aiocache
 import aiohttp
 
 from . import (
-    cache,
     parsers,
     settings,
     utils
 )
+from .cache import cache_key_builder
 
 
-@cache.cache_result
+@aiocache.cached(ttl=settings.DEFAULT_CACHE_EXPIRATION_TIME_IN_SECONDS, key_builder=cache_key_builder)
 async def get_current_weather_by_city_name(session: aiohttp.ClientSession,
                                            city_name: str, country_code: Optional[str] = None
                                            ) -> parsers.CurrentWeatherParser:
@@ -54,7 +55,7 @@ async def get_current_weather_by_city_name(session: aiohttp.ClientSession,
     return current_weather_parser
 
 
-@cache.cache_result
+@aiocache.cached(ttl=settings.DEFAULT_CACHE_EXPIRATION_TIME_IN_SECONDS, key_builder=cache_key_builder)
 async def get_weather_forecast_by_city_name(session: aiohttp.ClientSession,
                                             city_name: str, country_code: Optional[str] = None
                                             ) -> parsers.WeatherForecastParser:

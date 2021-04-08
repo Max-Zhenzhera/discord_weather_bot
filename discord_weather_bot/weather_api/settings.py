@@ -3,6 +3,7 @@ Contains settings for weather api package.
 
 Cache settings
 .. const:: DEFAULT_CACHE_EXPIRATION_TIME_IN_MINUTES
+.. const:: DEFAULT_CACHE_EXPIRATION_TIME_IN_SECONDS
 
 Weather API
 .. const:: CURRENT_WEATHER_API_URL
@@ -22,6 +23,7 @@ from ..settings import WEATHER_API_TOKEN
 # cache expiration time in minutes for weather api results
 DEFAULT_CACHE_EXPIRATION_TIME_IN_MINUTES = 10
 # 10 minutes - recommended time for the same requests to weather API
+DEFAULT_CACHE_EXPIRATION_TIME_IN_SECONDS = DEFAULT_CACHE_EXPIRATION_TIME_IN_MINUTES * 60
 # see https://openweathermap.org/appid#apicare
 
 # ----------------------------------------------------------

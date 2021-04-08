@@ -1,0 +1,46 @@
+# common settings
+version: 1
+disable_existing_loggers: false
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+# formatters
+formatters:
+    standard:
+        format: "%(asctime)s - %(name)s - [%(lineno)s] - %(levelname)s - %(message)s"
+
+    error:
+        format: "%(asctime)s - %(name)s - %(levelname)s - %(funcName)s() [%(lineno)s] : %(message)s"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+# handlers
+handlers:
+    info_console:
+        class: logging.StreamHandler
+        level: INFO
+        formatter: standard
+        stream: ext://sys.stderr
+
+    error_file_handler:
+        class: logging.handlers.RotatingFileHandler
+        level: ERROR
+        formatter: error
+        # path to filter from the core package
+        filename: ../logs/errors.log
+        maxBytes: 1000000 # 1MB
+        backupCount: 2
+        encoding: utf8
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+# root logger
+root:
+    level: NOTSET
+    handlers: [info_console, error_file_handler]
+    propogate: yes
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+

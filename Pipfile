@@ -5,9 +5,9 @@ name = "pypi"
 
 [packages]
 discord = "*"
-loguru = "*"
-expiringdict = "*"
-aiohttp = "*"
+aiocache = "*"
+python-dotenv = "*"
+pyyaml = "*"
 
 [dev-packages]
 

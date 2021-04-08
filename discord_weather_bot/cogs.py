@@ -9,13 +9,13 @@ Implements cogs (organized code) for bot.
     Handle weather commands
 """
 
+import logging
 from typing import (
     Optional
 )
 
 import aiohttp
 import discord
-import loguru
 from discord.ext import commands
 
 from . import (
@@ -25,16 +25,18 @@ from . import (
 )
 
 
+logger = logging.getLogger(__name__)
+
+
 class Events(discord.ext.commands.Cog):
     """ Implements cog extension that handle simple events """
 
-    def __init__(self, bot: discord.ext.commands.Bot, logger: loguru.logger):
+    def __init__(self, bot: discord.ext.commands.Bot):
         self.bot = bot
-        self.logger = logger
 
     @commands.Cog.listener()
     async def on_ready(self) -> None:
-        self.logger.info('BOT IS RUNNING')
+        logger.info('BOT IS RUNNING')
 
     @commands.Cog.listener()
     async def on_command_error(self,
@@ -76,50 +78,41 @@ class CommonCommands(discord.ext.commands.Cog):
 class WeatherCommands(discord.ext.commands.Cog):
     """ Implements cog extension that handle weather commands """
 
-    def __init__(self, bot: commands.Bot, session: aiohttp.ClientSession, logger: loguru.logger):
+    def __init__(self, bot: commands.Bot, session: aiohttp.ClientSession):
         self.bot = bot
         self.session = session
-        self.logger = logger
 
     async def cog_command_error(self,
                                 ctx: discord.ext.commands.Context, error: discord.ext.commands.CommandError
                                 ) -> None:
-        if not isinstance(error, discord.ext.commands.CommandInvokeError):
-            raise error
-
-        is_need_to_log = False
-
-        internal_error = error.original
-
-        if isinstance(internal_error, weather_api.errors.WeatherApiDeveloperError):
-            user_message = 'Oops! It seems like it is my error, sorry, try to use the command later!'
-
-            is_need_to_log = True
-        elif isinstance(internal_error, weather_api.errors.WeatherApiNotFoundError):
-            user_message = 'Hmm... It seems like you sent me wrong data: e.g. it might be incorrect city name. '
-            user_message += 'Please, be sure in your input data and try to use the command again!'
-        elif isinstance(internal_error, weather_api.errors.WeatherApiTooManyRequestsError):
-            user_message = 'Oops! It seems like pure bot is overloaded.'
-            user_message += 'Please, give bot some time for relax and try to use the command again!'
-        elif isinstance(internal_error, weather_api.errors.WeatherApiError):
-            user_message = 'Oops! It seems like it is my error, sorry, try to use the command later!'
-
-            is_need_to_log = True
-        else:
-            # no one weather api error caught -> there is not `weather_api.errors.WeatherApiError`
-
-            # debug
-            # raise internal_error
-            # - - -
+        if isinstance(error, discord.ext.commands.CommandInvokeError):
+            is_need_to_log = False
+            internal_error = error.original
 
             user_message = 'Oops! It seems like it is my error, sorry, try to use the command later!'
 
-            is_need_to_log = True
+            if isinstance(internal_error, weather_api.errors.WeatherApiError):
+                # catch all weather API errors
+                if isinstance(internal_error, weather_api.errors.WeatherApiDeveloperError):
+                    is_need_to_log = True
+                elif isinstance(internal_error, weather_api.errors.WeatherApiNotFoundError):
+                    user_message = 'Hmm... It seems like you sent me wrong data: e.g. it might be incorrect city name. '
+                    user_message += 'Please, be sure in your input data and try to use the command again!'
+                elif isinstance(internal_error, weather_api.errors.WeatherApiTooManyRequestsError):
+                    user_message = 'Oops! It seems like pure bot is overloaded.'
+                    user_message += 'Please, give bot some time for relax and try to use the command again!'
+                elif isinstance(internal_error, weather_api.errors.WeatherApiError):
+                    user_message = 'Oops! It seems like it is my error, sorry, try to use the command later!'
 
-        if is_need_to_log:
-            self.logger.exception(error)
+                    is_need_to_log = True
+            else:
+                # no one weather API error is caught
+                is_need_to_log = True
 
-        await ctx.send(user_message)
+            if is_need_to_log:
+                logger.exception(str(internal_error), exc_info=error)
+
+            await ctx.send(user_message)
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # !now
@@ -143,7 +136,7 @@ class WeatherCommands(discord.ext.commands.Cog):
                                   city_name: str, country_code: Optional[str] = None
                                   ) -> None:
         """
-        Send tomorrow weather data with embed.
+        Send current weather data with embed.
 
         :param ctx: context
         :type ctx: discord.ext.commands.Context

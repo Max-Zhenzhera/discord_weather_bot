@@ -131,8 +131,8 @@ class CurrentWeatherEmbed(WeatherEmbed):
         self.add_section(
             'Sunrise-Sunset time',
             {
-                'Sunrise at': current_weather.sunrise_datetime.time().isoformat(),
-                'Sunset at': current_weather.sunset_datetime.time().isoformat()
+                'Sunrise at [GMT]': current_weather.sunrise_datetime.time().isoformat(),
+                'Sunset at [GMT]': current_weather.sunset_datetime.time().isoformat()
             }
         )
 
@@ -155,7 +155,7 @@ class CurrentWeatherEmbed(WeatherEmbed):
             }
         )
 
-        self.set_footer(text=f"Data was computed at {current_weather.data_calculation_datetime.isoformat(' ')}")
+        self.set_footer(text=f"Data was computed at {current_weather.data_calculation_datetime.isoformat(' ')} [GMT]")
 
 
 class DayWeatherForecastEmbed(WeatherEmbed):
