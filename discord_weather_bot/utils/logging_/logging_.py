@@ -47,10 +47,11 @@ def setup_logging(config_path: pathlib.Path, default_level: Union[int, str] = lo
 
                         log_dir_path = log_path.parent
 
-                        print(log_path)
-                        
+                        print(log_dir_path)
+
                         log_dir_path.mkdir(parents=True, exist_ok=True)
 
+                print(config)
                 logging.config.dictConfig(config)
             except Exception as error:
                 raise error
