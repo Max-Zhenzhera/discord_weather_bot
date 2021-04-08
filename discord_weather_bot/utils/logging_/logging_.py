@@ -37,15 +37,14 @@ def setup_logging(config_path: pathlib.Path, default_level: Union[int, str] = lo
 
                 for handler_name in config['handlers']:
                     if 'file' in handler_name:
-                        log_path_from_main_package = config['handlers'][handler_name]['filename']
-                        log_path = (CORE_DIR / log_path_from_main_package).resolve()
-                        log_dir_path = log_path.parent
-                        print(config)
-                        print(log_path)
-                        print(log_dir_path)
+                        # log_path_from_main_package = config['handlers'][handler_name]['filename']
+                        # log_path = (CORE_DIR / log_path_from_main_package).resolve()
+                        # log_dir_path = log_path.parent
 
-                        log_dir_path.mkdir(parents=True, exist_ok=True)
-                        print(log_dir_path.exists())
+                        log_dir = pathlib.Path(config['handlers'][handler_name]['filename']).parent
+                        log_dir.mkdir(parents=True, exist_ok=True)
+
+                        # log_dir_path.mkdir(parents=True, exist_ok=True)
 
                 logging.config.dictConfig(config)
             except Exception as error:
