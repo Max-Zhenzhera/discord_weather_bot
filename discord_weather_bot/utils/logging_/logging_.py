@@ -39,15 +39,7 @@ def setup_logging(config_path: pathlib.Path, default_level: Union[int, str] = lo
                     if 'file' in handler_name:
                         log_path_from_main_package = config['handlers'][handler_name]['filename']
                         log_path = (CORE_DIR / log_path_from_main_package).resolve()
-
-                        print(settings.PROJECT_DIR)
-                        print(settings.CORE_DIR)
-                        print(settings.LOGGING_CONFIG_PATH)
-                        print(log_path)
-
                         log_dir_path = log_path.parent
-
-                        print(log_dir_path)
 
                         log_dir_path.mkdir(parents=True, exist_ok=True)
 

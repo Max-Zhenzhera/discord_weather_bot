@@ -28,7 +28,7 @@ handlers:
         level: ERROR
         formatter: error
         # path to filter from the core package
-        filename: ../logs/errors.log
+        filename: logs/errors.log
         maxBytes: 1000000 # 1MB
         backupCount: 2
         encoding: utf8
