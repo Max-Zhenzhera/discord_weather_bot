@@ -1,4 +1,6 @@
-sources/
-README.md
+.env
 
+sources/
 tests/
+
+README.md
