@@ -15,6 +15,8 @@ Contains parsers for weather API.
     Implements parser that parse weather forecast
 """
 
+from __future__ import annotations
+
 import datetime
 import itertools
 import operator

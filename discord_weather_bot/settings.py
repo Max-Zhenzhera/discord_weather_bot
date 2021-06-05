@@ -20,6 +20,8 @@ Contains settings.
 .. const:: EMBEDS_AUTHOR        | > indicated in each embed
 """
 
+from __future__ import annotations
+
 import pathlib
 import os
 

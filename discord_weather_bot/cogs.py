@@ -9,6 +9,8 @@ Implements cogs (organized code) for bot.
     Handle weather commands
 """
 
+from __future__ import annotations
+
 import logging
 from typing import (
     Optional

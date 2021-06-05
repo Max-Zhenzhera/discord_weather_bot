@@ -16,6 +16,8 @@ Contains weather api errors.
     Contains pairs of the response code and corresponding exception class (e.g. ` 400: WeatherApiBadRequestError `)
 """
 
+from __future__ import annotations
+
 
 class WeatherApiError(Exception):
     """ Implements base error that might be raised during the weather api usage """

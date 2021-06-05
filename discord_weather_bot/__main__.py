@@ -2,6 +2,8 @@
 Entry point.
 """
 
+from __future__ import annotations
+
 # add package to global path -------------------------------------------------------------------------------------------
 import sys
 import pathlib

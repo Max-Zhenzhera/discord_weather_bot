@@ -5,6 +5,8 @@ Contains implementation of the weather bot.
     Implements discord weather bot
 """
 
+from __future__ import annotations
+
 import aiohttp
 import discord
 from discord.ext import commands

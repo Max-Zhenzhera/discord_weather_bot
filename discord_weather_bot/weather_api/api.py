@@ -13,6 +13,8 @@ ________________________________________________________________________________
     Return weather forecast data by cite name
 """
 
+from __future__ import annotations
+
 from typing import (
     Optional
 )

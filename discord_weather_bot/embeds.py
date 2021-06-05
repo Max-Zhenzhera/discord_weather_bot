@@ -14,6 +14,8 @@ Implements embeds (organized messages) for bot.
 .. class:: TemperatureWeatherForecast(WeatherEmbed)
 """
 
+from __future__ import annotations
+
 import datetime
 
 import discord

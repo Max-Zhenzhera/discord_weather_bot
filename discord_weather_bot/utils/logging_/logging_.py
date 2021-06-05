@@ -5,6 +5,8 @@ Implements logging.
     Setup logging
 """
 
+from __future__ import annotations
+
 import logging
 import logging.config
 import pathlib
@@ -16,6 +18,7 @@ import yaml
 
 from ...settings import CORE_DIR
 from ... import settings
+
 
 def setup_logging(config_path: pathlib.Path, default_level: Union[int, str] = logging.INFO) -> None:
     """

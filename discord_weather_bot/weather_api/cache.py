@@ -5,6 +5,8 @@ Implements functions for caching.
     Generate key for cache
 """
 
+from __future__ import annotations
+
 
 def cache_key_builder(f, *args, **kwargs) -> str:
     """ Generate key for cache """

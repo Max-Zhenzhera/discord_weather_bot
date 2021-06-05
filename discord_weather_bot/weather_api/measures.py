@@ -8,6 +8,9 @@ Contains measure values constants.
 .. const:: WIND_SPEED
 """
 
+from __future__ import annotations
+
+
 TEMPERATURE = '°C'
 PRESSURE = 'hPa'
 HUMIDITY = '%'

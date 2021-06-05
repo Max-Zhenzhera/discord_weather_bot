@@ -15,6 +15,8 @@ Common params
 .. const:: COMMON_PARAMS
 """
 
+from __future__ import annotations
+
 from ..settings import WEATHER_API_TOKEN
 
 

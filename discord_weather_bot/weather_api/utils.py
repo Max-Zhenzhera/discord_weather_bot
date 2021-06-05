@@ -5,6 +5,8 @@ Contains some helper functions.
     Return json response parsed in ``dict``
 """
 
+from __future__ import annotations
+
 import aiohttp
 
 
